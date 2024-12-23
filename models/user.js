@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, required: false }, 
   gender: { type: String, enum: ["Male", "Female", "Other"], required: false }, 
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },   
+ 
 });
 
 module.exports = mongoose.model("User", userSchema);
