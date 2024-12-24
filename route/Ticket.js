@@ -1,23 +1,27 @@
 const express = require("express");
 const router = express.Router();
-// Import authentication middleware
-const authMiddleware = require("../middleware/authMiddleware");
 
-const {
+const { auth } = require("../middleware/auth");
+
+const{
   createTicket,
-  searchTickets, // Make sure this matches the controller function
-  getTicket,
-} = require("../controllers/TicketEnter"); 
+  searchTickets,
+  getTicketDetails,
+} = require("../controllers/Ticket");
 
-
+const{
+  getUserTickets
+}=require("../controllers/userTicket");
 
 // Route to create a new ticket - requires authentication
-router.post("/tickets", authMiddleware, createTicket);
+router.post("/tickets",  auth,  createTicket);
 
 // Route to search tickets - requires authentication
-router.get("/tickets/search", authMiddleware, searchTickets);
+router.get("/tickets/search", auth, searchTickets);
 
 // Route to get a specific ticket by ID - requires authentication
-router.get("/tickets/:id", authMiddleware, getTicket); 
+router.get("/tickets/:id", auth,  getTicketDetails);
 
-module.exports = router; // Export the router
+router.get("/user/tickets", auth, getUserTickets);
+
+module.exports = router; 

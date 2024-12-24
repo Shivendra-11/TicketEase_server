@@ -103,7 +103,7 @@ exports.login = async (req, res) => {
     if (passwordMatch) {
       // Generate JWT token
       const token = jwt.sign(
-        { email: user.email, id: user._id, role: user.role }, // Add any other data as required
+        { email: user.email, id: user._id }, // Add any other data as required
         process.env.JWT_SECRET, // Make sure you have set this secret in .env
         {
           expiresIn: "24h", // Token expires in 24 hours
@@ -139,3 +139,23 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+
+// Logout
+
+exports.logout = async (req, res) => {
+  try {
+    // Clear the cookie
+    res.clearCookie("token");
+    return res.status(200).json({
+      success: true,
+      message: `User logged out successfully`,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: `Logout failure. Please try again`,
+    });
+  }
+};  
