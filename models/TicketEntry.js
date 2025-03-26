@@ -66,11 +66,11 @@ const ticketSchema = new mongoose.Schema(
     },
     facebooklink: {
       type: String,
-      required: false, // Optional field for Facebook link
+      required: false,
     },
   },
   {
-    timestamps: true, // Automatically adds `createdAt` and `updatedAt` fields
+    timestamps: true, 
   }
 );
 
